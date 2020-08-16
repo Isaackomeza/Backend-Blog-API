@@ -18,7 +18,9 @@
   },
   "homepage": "https://github.com/Isaackomeza/Backend-Blog-API#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "joi": "^17.2.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.5",
