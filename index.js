@@ -47,3 +47,13 @@ app.post('/api/blogs', (req, res) => {
   blogs.push(blog);
   res.send(blog);
 });
+
+app.delete('/api/blogs/:id', (req, res)=> {
+  const blog = blogs.find(b => b.id === parseInt(req.params.id));
+  if (!blog) {
+  res.status(404).send('The blog with the given ID was not found')
+};
+  const index = blogs.indexOf(blog);
+  blogs.splice(index, 1);
+  res.send(blog);
+})
