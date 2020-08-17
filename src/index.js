@@ -5,11 +5,7 @@ const express = require('express')
 const app = express();
 app.use(express.json());
 
-const blogs = [
-  {id: 1, name: 'blog1'},
-  {id: 2, name: 'blog2'},
-  {id: 3, name: 'blog3'},
-];
+
 app.use(cors())
 app.get('/', (req, res)=> {
   res.send('Hello World!!!');
