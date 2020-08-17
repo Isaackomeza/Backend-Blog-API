@@ -20,7 +20,8 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "joi": "^17.2.0"
+    "joi": "^17.2.0",
+    "uuidv4": "^6.2.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.5",
