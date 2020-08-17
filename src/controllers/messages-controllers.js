@@ -38,7 +38,7 @@ export const readById = (req, res) => {
 export const create = (req, res) => {
     const message = {
         id: uuidv4(),
-        name:req.body.fullname,
+        name:req.body.name,
         email: req.body.email,
         phone:req.body.phone,
         message: req.body.message
