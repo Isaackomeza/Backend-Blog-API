@@ -4,10 +4,12 @@ import Mroute from './routes/messages-routes';
 import Blogroute from './routes/blogs-routes';
 import Userroute from './routes/users-routes';
 import Commentroute from './routes/comments-routes';
+import Authroute from './routes/auth.routes';
+
 
 const server = express();
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4000;
 
 server.use(express.json());
 server.use(express.urlencoded({ extended: false }));
@@ -18,6 +20,8 @@ server.use('/', Mroute);
 server.use('/', Blogroute);
 server.use('/', Userroute);
 server.use('/', Commentroute);
+server.use('/', Authroute);
+
 
 // server.use((req, res, next) => {
 //     next(createError.NotFound('Not found'));
