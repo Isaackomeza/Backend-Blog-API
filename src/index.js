@@ -9,7 +9,7 @@ import Authroute from './routes/auth.routes';
 
 const server = express();
 
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 3000;
 
 server.use(express.json());
 server.use(express.urlencoded({ extended: false }));

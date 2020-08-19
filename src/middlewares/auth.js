@@ -3,21 +3,7 @@ import {} from 'dotenv/config';
 import {createError} from 'http-errors';
 const {SECRET_KEY} = process.env;
 
-// export const verifyUser = (req,res, next) => {
-//     authorization = req.headers['authorization'];
-//     if(authorization){
-//         const bearerToken = authorization.split(' ')[1];
-//         const token = jwk.verify(bearerToken, SECRET_KEY);
-//         if(token){
-//             res.user = token;
-//             next();
-//         } else {
-//             res.send(createError.authorization());
-//         }
-//     } else{
-//         res.send(createError.authorization());
-//     }
-// }
+
 
 export const verifyUser = (req, res, next)=>{
     const bearerHeader = req.headers['authorization'];

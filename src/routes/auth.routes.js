@@ -7,22 +7,6 @@ const {SECRET_KEY} = process.env;
 
 const route = express.Router();
 
-// route.post('/signup', async (req, res) => {
-//     const {username, email} = req.body;
-//     try {
-//         const token = jwt.sign({username, email}, SECRET_KEY);
-//         res.send(token);
-//     } catch (err) {
-//         new Error(err);
-//         res.send(err);
-//     }
-// });
-
-// route.post('/login', (req, res) => {
-//     res.json({
-//         user: '',
-//     });
-// });
 
 route.post('/posts',verifyUser, (req, res) => {
     jwt.verify(req.token, 'SECRET_KEY', (err, authData) => {
