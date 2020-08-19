@@ -1,4 +1,4 @@
-import messages from '../models/messages-collection';
+import messages from '../models/messagesCollection';
 import { v4 as uuidv4 } from 'uuid';
 
 
@@ -19,10 +19,10 @@ export const readAll = (req, res) => {
 };
 export const readById = (req, res) => {
     const id = req.params.id;
-    const message = messages.filter((user) => {
-        return user.id === id;
+    const message = messages.find((message) => {
+        return message.id === id;
     });
-    if (message[0]) {
+    if (message) {
         return res.status(200).json({
             status: 200,
             message: 'message successfully retrieved',
@@ -38,7 +38,7 @@ export const readById = (req, res) => {
 export const create = (req, res) => {
     const message = {
         id: uuidv4(),
-        name:req.body.name,
+        name:req.body.fullname,
         email: req.body.email,
         phone:req.body.phone,
         message: req.body.message
@@ -54,14 +54,14 @@ export const create = (req, res) => {
 
 export const update=(req,res)=>{
     const id = req.params.id;
-    const message = messages.filter((message) => {
+    const message = messages.find((message) => {
         return message.id === id;
     });
-    if(message[0]){
-        message[0].name= req.body.name;
-        message[0].email=req.body.email;
-        message[0].phone=req.body.phone;
-        message[0].message=req.body.message;
+    if(message){
+        message.name= req.body.name;
+        message.email=req.body.email;
+        message.phone=req.body.phone;
+        message.message=req.body.message;
         
         return res.status(200).json({
             status: 200,
@@ -78,11 +78,11 @@ export const update=(req,res)=>{
 
 export const deleteMessage=(req,res)=>{
     const id=req.params.id;
-    const message = messages.filter((message) => {
+    const message = messages.find((message) => {
         return message.id === id;
     });
-    if(message[0]){
-        var a = messages.indexOf(message[0]);
+    if(message){
+        var a = messages.indexOf(message);
         messages.splice(a, 1);
         return res.status(200).json({
             status: 200,

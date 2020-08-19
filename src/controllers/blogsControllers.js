@@ -1,4 +1,4 @@
-import blogs from '../models/blogs-collection';
+import blogs from '../models/blogsCollection';
 import { v4 as uuidv4 } from 'uuid';
 
 
@@ -19,10 +19,10 @@ export const readAll = (req, res) => {
 };
 export const readById = (req, res) => {
     const id = req.params.id;
-    const blog = blogs.filter((user) => {
-        return user.id === id;
+    const blog = blogs.find((blog) => {
+        return blog.id === id;
     });
-    if (blog[0]) {
+    if (blog) {
         return res.status(200).json({
             status: 200,
             blog: 'blog successfully retrieved',
@@ -53,13 +53,13 @@ export const create = (req, res) => {
 
 export const update=(req,res)=>{
     const id = req.params.id;
-    const blog = blogs.filter((blog) => {
+    const blog = blogs.find((blog) => {
         return blog.id === id;
     });
-    if(blog[0]){
-        blog[0].author= req.body.author;
-        blog[0].title=req.body.title;
-        blog[0].description=req.body.description;
+    if(blog){
+        blog.author= req.body.author;
+        blog.title=req.body.title;
+        blog.description=req.body.description;
         
         return res.status(200).json({
             status: 200,
@@ -76,11 +76,11 @@ export const update=(req,res)=>{
 
 export const deleteBlog=(req,res)=>{
     const id=req.params.id;
-    const blog = blogs.filter((blog) => {
+    const blog = blogs.find((blog) => {
         return blog.id === id;
     });
-    if(blog[0]){
-        var a = blogs.indexOf(blog[0]);
+    if(blog){
+        var a = blogs.indexOf(blog);
         blogs.splice(a, 1);
         return res.status(200).json({
             status: 200,

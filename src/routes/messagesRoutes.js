@@ -1,5 +1,5 @@
 import express from 'express';
-import {create,readAll,readById,update,deleteMessage} from '../controllers/messages-controllers';
+import {create,readAll,readById,update,deleteMessage} from '../controllers/messagesControllers';
 
 const router = express.Router();
 router.post('/message', create);
