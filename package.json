@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --exec babel-node src/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node --debug ./build/index.js",
+    "dev": "nodemon --exec babel-node ./src/index.js",
+    "build": "rm -rf build && babel ./src -d build"
   },
   "repository": {
     "type": "git",
@@ -21,6 +22,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
+    "engine": "^1.0.0",
     "express": "^4.17.1",
     "http-errors": "^1.8.0",
     "joi": "^17.2.0",

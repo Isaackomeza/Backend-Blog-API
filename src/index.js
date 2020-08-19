@@ -1,9 +1,12 @@
 import express from 'express';
 import {createError} from 'http-errors';
-import Mroute from './routes/messagesRoutes';
-import Blogroute from './routes/blogsRoutes';
-import Userroute from './routes/usersRoutes';
-import Commentroute from './routes/commentsRoutes';
+
+import Mroute from './routes/messages-routes';
+import Blogroute from './routes/blogs-routes';
+import Userroute from './routes/users-routes';
+import Commentroute from './routes/comments-routes';
+import Authroute from './routes/auth.routes';
+
 
 const server = express();
 
@@ -18,6 +21,8 @@ server.use('/', Mroute);
 server.use('/', Blogroute);
 server.use('/', Userroute);
 server.use('/', Commentroute);
+server.use('/', Authroute);
+
 
 // server.use((req, res, next) => {
 //     next(createError.NotFound('Not found'));
