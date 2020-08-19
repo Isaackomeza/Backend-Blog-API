@@ -1,4 +1,4 @@
-import messages from '../models/messages-collection';
+import messages from '../models/messagesCollection';
 import { v4 as uuidv4 } from 'uuid';
 
 

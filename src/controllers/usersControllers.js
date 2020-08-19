@@ -1,5 +1,5 @@
 
-import users from '../models/users-collection';
+import users from '../models/usersCollection';
 import { v4 as uuidv4 } from 'uuid';
 
 

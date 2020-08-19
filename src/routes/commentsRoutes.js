@@ -1,5 +1,5 @@
 import express from 'express';
-import {create,readAll,readById,update,deleteComment} from '../controllers/comments-controllers';
+import {create,readAll,readById,update,deleteComment} from '../controllers/commentsControllers';
 
 const router = express.Router();
 router.post('/comment', create);

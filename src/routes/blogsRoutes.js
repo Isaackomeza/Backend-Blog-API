@@ -1,5 +1,5 @@
 import express from 'express';
-import {create, readAll, readById, update, deleteBlog} from '../controllers/blogs-controllers';
+import {create, readAll, readById, update, deleteBlog} from '../controllers/blogsControllers';
 
 const router = express.Router();
 router.post('/blog', create);

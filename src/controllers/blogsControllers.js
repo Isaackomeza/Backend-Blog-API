@@ -1,4 +1,4 @@
-import blogs from '../models/blogs-collection';
+import blogs from '../models/blogsCollection';
 import { v4 as uuidv4 } from 'uuid';
 
 

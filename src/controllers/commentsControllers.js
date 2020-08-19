@@ -1,4 +1,4 @@
-import comments from '../models/comments-collection';
+import comments from '../models/commentsCollection';
 import { v4 as uuidv4 } from 'uuid';
 
 
