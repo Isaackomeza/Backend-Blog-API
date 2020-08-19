@@ -20,10 +20,10 @@ export const readAll = (req, res) => {
 };
 export const readById = (req, res) => {
     const id = req.params.id;
-    const user = users.filter((user) => {
+    const user = users.find((user) => {
         return user.id === id;
     });
-    if (user[0]) {
+    if (user) {
         return res.status(200).json({
             status: 200,
             message: 'user successfully retrieved',
@@ -55,13 +55,13 @@ export const create = (req, res) => {
 
 export const update=(req,res)=>{
     const id = req.params.id;
-    const user = users.filter((user) => {
+    const user = users.find((user) => {
         return user.id === id;
     });
-    if(user[0]){
-        user[0].username=req.body.username;
-        user[0].email=req.body.email;
-        user[0].password= req.body.password;
+    if(user){
+        user.username=req.body.username;
+        user.email=req.body.email;
+        user.password= req.body.password;
         return res.status(200).json({
             status: 200,
             message: 'user successfully updated',
@@ -77,10 +77,10 @@ export const update=(req,res)=>{
 
 export const deleteUser=(req,res)=>{
     const id=req.params.id;
-    const user = users.filter((user) => {
+    const user = users.find((user) => {
         return user.id === id;
     });
-    if(user[0]){
+    if(user){
         var a = users.indexOf(user[0]);
         users.splice(a, 1);
         return res.status(200).json({

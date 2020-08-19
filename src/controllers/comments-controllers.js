@@ -19,10 +19,10 @@ export const readAll = (req, res) => {
 };
 export const readById = (req, res) => {
     const id = req.params.id;
-    const comment = comments.filter((user) => {
-        return user.id === id;
+    const comment = comments.find((comment) => {
+        return comment.id === id;
     });
-    if (comment[0]) {
+    if (comment) {
         return res.status(200).json({
             status: 200,
             comment: 'comment successfully retrieved',
@@ -53,13 +53,13 @@ export const create = (req, res) => {
 
 export const update=(req,res)=>{
     const id = req.params.id;
-    const comment = comments.filter((comment) => {
+    const comment = comments.find((comment) => {
         return comment.id === id;
     });
-    if(comment[0]){
-        comment[0].name= req.body.name;
-        comment[0].email=req.body.email;
-        comment[0].comment=req.body.comment;
+    if(comment){
+        comment.name= req.body.name;
+        comment.email=req.body.email;
+        comment.comment=req.body.comment;
         
         return res.status(200).json({
             status: 200,
@@ -76,11 +76,11 @@ export const update=(req,res)=>{
 
 export const deleteComment=(req,res)=>{
     const id=req.params.id;
-    const comment = comments.filter((comment) => {
+    const comment = comments.find((comment) => {
         return comment.id === id;
     });
-    if(comment[0]){
-        var a = comments.indexOf(comment[0]);
+    if(comment){
+        var a = comments.indexOf(comment);
         comments.splice(a, 1);
         return res.status(200).json({
             status: 200,
