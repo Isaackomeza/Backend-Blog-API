@@ -9,10 +9,10 @@ var _usersCollection = _interopRequireDefault(require("../models/usersCollection
 
 var _uuid = require("uuid");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var readAll = function readAll(req, res) {
-  if (!_usersCollection["default"]) {
+const readAll = (req, res) => {
+  if (!_usersCollection.default) {
     return res.status(404).json({
       status: 404,
       error: 'No User found'
@@ -23,17 +23,17 @@ var readAll = function readAll(req, res) {
     status: 200,
     message: 'users successfully retrieved',
     data: {
-      users: _usersCollection["default"]
+      users: _usersCollection.default
     }
   });
 };
 
 exports.readAll = readAll;
 
-var readById = function readById(req, res) {
-  var id = req.params.id;
+const readById = (req, res) => {
+  const id = req.params.id;
 
-  var user = _usersCollection["default"].find(function (user) {
+  const user = _usersCollection.default.find(user => {
     return user.id === id;
   });
 
@@ -53,8 +53,8 @@ var readById = function readById(req, res) {
 
 exports.readById = readById;
 
-var create = function create(req, res) {
-  var user = {
+const create = (req, res) => {
+  const user = {
     id: (0, _uuid.v4)(),
     username: req.body.username,
     email: req.body.email,
@@ -62,7 +62,7 @@ var create = function create(req, res) {
     role: 'user'
   };
 
-  _usersCollection["default"].push(user);
+  _usersCollection.default.push(user);
 
   return res.status(201).json({
     status: 201,
@@ -73,10 +73,10 @@ var create = function create(req, res) {
 
 exports.create = create;
 
-var update = function update(req, res) {
-  var id = req.params.id;
+const update = (req, res) => {
+  const id = req.params.id;
 
-  var user = _usersCollection["default"].find(function (user) {
+  const user = _usersCollection.default.find(user => {
     return user.id === id;
   });
 
@@ -99,17 +99,17 @@ var update = function update(req, res) {
 
 exports.update = update;
 
-var deleteUser = function deleteUser(req, res) {
-  var id = req.params.id;
+const deleteUser = (req, res) => {
+  const id = req.params.id;
 
-  var user = _usersCollection["default"].find(function (user) {
+  const user = _usersCollection.default.find(user => {
     return user.id === id;
   });
 
   if (user) {
-    var a = _usersCollection["default"].indexOf(user[0]);
+    var a = _usersCollection.default.indexOf(user[0]);
 
-    _usersCollection["default"].splice(a, 1);
+    _usersCollection.default.splice(a, 1);
 
     return res.status(200).json({
       status: 200,
@@ -125,4 +125,3 @@ var deleteUser = function deleteUser(req, res) {
 };
 
 exports.deleteUser = deleteUser;
-//# sourceMappingURL=usersControllers.js.map

@@ -9,10 +9,10 @@ var _messagesCollection = _interopRequireDefault(require("../models/messagesColl
 
 var _uuid = require("uuid");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var readAll = function readAll(req, res) {
-  if (!_messagesCollection["default"]) {
+const readAll = (req, res) => {
+  if (!_messagesCollection.default) {
     return res.status(404).json({
       status: 404,
       error: 'No message found'
@@ -23,17 +23,17 @@ var readAll = function readAll(req, res) {
     status: 200,
     message: 'messages successfully retrieved',
     data: {
-      messages: _messagesCollection["default"]
+      messages: _messagesCollection.default
     }
   });
 };
 
 exports.readAll = readAll;
 
-var readById = function readById(req, res) {
-  var id = req.params.id;
+const readById = (req, res) => {
+  const id = req.params.id;
 
-  var message = _messagesCollection["default"].find(function (message) {
+  const message = _messagesCollection.default.find(message => {
     return message.id === id;
   });
 
@@ -53,8 +53,8 @@ var readById = function readById(req, res) {
 
 exports.readById = readById;
 
-var create = function create(req, res) {
-  var message = {
+const create = (req, res) => {
+  const message = {
     id: (0, _uuid.v4)(),
     name: req.body.fullname,
     email: req.body.email,
@@ -62,7 +62,7 @@ var create = function create(req, res) {
     message: req.body.message
   };
 
-  _messagesCollection["default"].push(message);
+  _messagesCollection.default.push(message);
 
   return res.status(201).json({
     status: 201,
@@ -73,10 +73,10 @@ var create = function create(req, res) {
 
 exports.create = create;
 
-var update = function update(req, res) {
-  var id = req.params.id;
+const update = (req, res) => {
+  const id = req.params.id;
 
-  var message = _messagesCollection["default"].find(function (message) {
+  const message = _messagesCollection.default.find(message => {
     return message.id === id;
   });
 
@@ -100,17 +100,17 @@ var update = function update(req, res) {
 
 exports.update = update;
 
-var deleteMessage = function deleteMessage(req, res) {
-  var id = req.params.id;
+const deleteMessage = (req, res) => {
+  const id = req.params.id;
 
-  var message = _messagesCollection["default"].find(function (message) {
+  const message = _messagesCollection.default.find(message => {
     return message.id === id;
   });
 
   if (message) {
-    var a = _messagesCollection["default"].indexOf(message);
+    var a = _messagesCollection.default.indexOf(message);
 
-    _messagesCollection["default"].splice(a, 1);
+    _messagesCollection.default.splice(a, 1);
 
     return res.status(200).json({
       status: 200,
@@ -126,4 +126,3 @@ var deleteMessage = function deleteMessage(req, res) {
 };
 
 exports.deleteMessage = deleteMessage;
-//# sourceMappingURL=messagesControllers.js.map

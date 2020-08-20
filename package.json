@@ -4,10 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node --debug ./build/index.js",
+    "start": "node ./build/index.js",
     "dev": "nodemon --exec babel-node ./src/index.js",
-    "build": "babel ./src -d build --source-maps --copy-files"
-    
+    "build": " babel ./src -d build"
   },
   "repository": {
     "type": "git",
@@ -27,6 +26,7 @@
     "http-errors": "^1.8.0",
     "joi": "^17.2.0",
     "jsonwebtoken": "^8.5.1",
+    "regenerator-runtime": "^0.13.7",
     "uuidv4": "^6.2.2"
   },
   "devDependencies": {

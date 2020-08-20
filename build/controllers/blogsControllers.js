@@ -9,10 +9,10 @@ var _blogsCollection = _interopRequireDefault(require("../models/blogsCollection
 
 var _uuid = require("uuid");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var readAll = function readAll(req, res) {
-  if (!_blogsCollection["default"]) {
+const readAll = (req, res) => {
+  if (!_blogsCollection.default) {
     return res.status(404).json({
       status: 404,
       error: 'Blog not accessible'
@@ -23,17 +23,17 @@ var readAll = function readAll(req, res) {
     status: 200,
     blog: 'blogs successfully retrieved',
     data: {
-      blogs: _blogsCollection["default"]
+      blogs: _blogsCollection.default
     }
   });
 };
 
 exports.readAll = readAll;
 
-var readById = function readById(req, res) {
-  var id = req.params.id;
+const readById = (req, res) => {
+  const id = req.params.id;
 
-  var blog = _blogsCollection["default"].find(function (blog) {
+  const blog = _blogsCollection.default.find(blog => {
     return blog.id === id;
   });
 
@@ -53,15 +53,15 @@ var readById = function readById(req, res) {
 
 exports.readById = readById;
 
-var create = function create(req, res) {
-  var blog = {
+const create = (req, res) => {
+  const blog = {
     id: (0, _uuid.v4)(),
     author: req.body.author,
     title: req.body.title,
     description: req.body.description
   };
 
-  _blogsCollection["default"].push(blog);
+  _blogsCollection.default.push(blog);
 
   return res.status(201).json({
     status: 201,
@@ -72,10 +72,10 @@ var create = function create(req, res) {
 
 exports.create = create;
 
-var update = function update(req, res) {
-  var id = req.params.id;
+const update = (req, res) => {
+  const id = req.params.id;
 
-  var blog = _blogsCollection["default"].find(function (blog) {
+  const blog = _blogsCollection.default.find(blog => {
     return blog.id === id;
   });
 
@@ -98,17 +98,17 @@ var update = function update(req, res) {
 
 exports.update = update;
 
-var deleteBlog = function deleteBlog(req, res) {
-  var id = req.params.id;
+const deleteBlog = (req, res) => {
+  const id = req.params.id;
 
-  var blog = _blogsCollection["default"].find(function (blog) {
+  const blog = _blogsCollection.default.find(blog => {
     return blog.id === id;
   });
 
   if (blog) {
-    var a = _blogsCollection["default"].indexOf(blog);
+    var a = _blogsCollection.default.indexOf(blog);
 
-    _blogsCollection["default"].splice(a, 1);
+    _blogsCollection.default.splice(a, 1);
 
     return res.status(200).json({
       status: 200,
@@ -124,4 +124,3 @@ var deleteBlog = function deleteBlog(req, res) {
 };
 
 exports.deleteBlog = deleteBlog;
-//# sourceMappingURL=blogsControllers.js.map

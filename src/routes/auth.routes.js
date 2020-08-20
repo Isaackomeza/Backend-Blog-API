@@ -35,7 +35,7 @@ route.post('/login', (req, res) => {
     // const email = req.body.email;
     // const user = {username, email};
 
-    jwt.sign({user},'SECRET_KEY', { expiresIn: '30s'},(err, token)=> {
+    jwt.sign({user},'SECRET_KEY', (err, token)=> {
         res.json({
             token
         });
