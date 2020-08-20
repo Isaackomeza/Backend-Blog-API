@@ -22,11 +22,19 @@ route.post('/posts',verifyUser, (req, res) => {
 
 });
 
+// route.get('/posts',verifyUser, (req, res)=>{
+//     res.json(posts.filter(post => post.username === req.user.username))
+// })
+
 route.post('/login', (req, res) => {
     const user = {
         username: 'isaackomeza',
         email: 'isaackomeza@gmail.com'
     }
+    // const username = req.body.username;
+    // const email = req.body.email;
+    // const user = {username, email};
+
     jwt.sign({user},'SECRET_KEY', { expiresIn: '30s'},(err, token)=> {
         res.json({
             token
