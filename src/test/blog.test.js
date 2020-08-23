@@ -7,32 +7,32 @@ chai.should();
 
 chai.use(chaiHttp);
 
-describe('message API', ()=>{
+describe('Blog API', ()=>{
     // Test GET route
-    describe('GET /messages', ()=>{
-        it('It should get all messages', (done)=>{
+    describe('GET /blogs', ()=>{
+        it('It should get all blogs', (done)=>{
             chai.request(server)
-                .get('/message')
+                .get('/blog')
                     .end((err, res)=>{
                         expect(err).to.be.null;
                         expect(res).to.have.status(200);
                         expect(res).to.be.an('object');
-                        expect(res.body.data.messages).to.be.an('array');
-                        res.body.data.messages.map(message=>{
-                            expect(message.name).to.be.an('string')
+                        expect(res.body.data.blogs).to.be.an('array');
+                        res.body.data.blogs.map(blog=>{
+                            expect(blog.description).to.be.an('string')
                         });
-                        //expect(res.body.data.messages[0].name).to.be.an('string');
+                        //expect(res.body.data.blogs[0].name).to.be.an('string');
                         done();
                     });
         });
     });
 
     // Test GET route by id
-    describe('GET /message/:id', ()=>{
-    it('It should GET a message by ID', (done)=>{
-        const messageId = uuidv4;
+    describe('GET /blog/:id', ()=>{
+    it('It should GET a blog by ID', (done)=>{
+        const blogId = uuidv4;
         chai.request(server)
-            .get('/message' + messageId)
+            .get('/blog' + blogId)
                 .end((err, res)=>{
                     expect(err).to.be.null;
                     expect(res).to.have.status(200);
@@ -40,53 +40,51 @@ describe('message API', ()=>{
                     done();
                 });
     });
-    it('It should not GET a message by ID that is not exist', (done) => {
+    it('It should not GET a blog by ID that is not exist', (done) => {
         chai
           .request(server)
-          .get('/message/5')
+          .get('/blog/5')
           .end((err, res) => {
             expect(res.status).to.equal(404);
-            expect(res.body.error).to.equal('message not found');
+            expect(res.body.error).to.equal('blog can not be found');
             done();
           });
       });
 });
 
     // Test POST route
-    describe('POST /messages', ()=>{
-        it('It should POST a new message', (done)=>{
-            const message = {
-                name:'Komezusenge',
-                email:'isaackomeza@gmail.com',
-                phone:'078786868',
-                message:'jdsbdvbiqnvbaidjbvibduq'
+    describe('POST /blogs', ()=>{
+        it('It should POST a new blog', (done)=>{
+            const blog = {
+                author: 'Peter',
+                title: 'How to study javascript in one day',
+                description: 'For sure cfewhsbjvbfjvabijvbsjvfbjwbnsfjnbwobhsonw',
             };
             chai.request(server)
-                .post('/message')
-                .send(message)
+                .post('/blog')
+                .send(blog)
                     .end((err, res)=>{
                         expect(err).to.be.null;
                         expect(res).to.have.status(201);
                         expect(res).to.be.an('object');
-                        expect(res.body.message).to.equal('message successfully created');
+                        expect(res.body.blog).to.equal('blog successfully created');
                         done();
                     });
         });
     });
 
     // Test PUT route
-    describe('PUT /message/:id', ()=>{
-        it('It should PUT a new message', (done)=>{
-            const messageId = uuidv4;
-            const message = {
-                name:'Komezusenge updated',
-                email:'isaackomeza@gmail.com',
-                phone:'078786868',
-                message:'jdsbdvbiqnvbaidjbvibduq  changed'
+    describe('PUT /blog/:id', ()=>{
+        it('It should PUT a new blog', (done)=>{
+            const blogId = uuidv4;
+            const blog = {
+                author: 'Isaac new',
+                title: 'How to study javascript in one day',
+                description: ' cfewhsbjvbfjvabijvbsjvfbjwbnsfjnbwobhsonw',
             };
             chai.request(server)
-                .put('/message' + messageId)
-                .send(message)
+                .put('/blog' + blogId)
+                .send(blog)
                     .end((err, res)=>{
                         expect(err).to.be.null;
                         expect(res).to.have.status(200);
@@ -96,24 +94,24 @@ describe('message API', ()=>{
         });
     });
     // Test DELETE route
-    describe('DELETE /message/:id', ()=>{
-        it('It should DELETE an existing message', (done)=>{
-            const messageId = uuidv4;
+    describe('DELETE /blog/:id', ()=>{
+        it('It should DELETE an existing blog', (done)=>{
+            const blogId = uuidv4;
 
             chai.request(server)
-                .delete('/message' + messageId)
+                .delete('/blog' + blogId)
                     .end((err, res)=>{
                         expect(res).to.have.status(200);
                         done();
                     });
         });
-        it('It should not DELETE a message by ID that is not exist', (done) => {
+        it('It should not DELETE a blog by ID that is not exist', (done) => {
             chai
               .request(server)
-              .delete('/message/5')
+              .delete('/blog/5')
               .end((err, res) => {
                 expect(res.status).to.equal(404);
-                expect(res.body.error).to.equal('message not found');
+                expect(res.body.error).to.equal('blog not found');
                 done();
               });
           });
