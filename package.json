@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node ./build/index.js",
     "dev": "nodemon --exec babel-node ./src/index.js",
-    "build": " babel ./src -d build"
+    "build": " babel ./src -d build",
+    "test": "mocha ./src/test --require @babel/register"
   },
   "repository": {
     "type": "git",
@@ -35,6 +36,9 @@
     "@babel/node": "^7.10.5",
     "@babel/preset-env": "^7.11.0",
     "@babel/register": "^7.10.5",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "mocha": "^8.1.1",
     "nodemon": "^2.0.4"
   },
   "engines": {
