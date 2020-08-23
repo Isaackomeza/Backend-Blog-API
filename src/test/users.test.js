@@ -3,7 +3,7 @@ import {expect} from "chai";
 import chaiHttp from "chai-http";
 import server from '../index';
 import { v4 as uuidv4 } from 'uuid';
-chai.should();
+
 
 chai.use(chaiHttp);
 

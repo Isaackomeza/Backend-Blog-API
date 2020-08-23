@@ -4,13 +4,13 @@ import { v4 as uuidv4 } from 'uuid';
 
 export const readAll = (req, res) => {
     if (!comments) {
-        return res.status(404).json({
+    return res.status(404).json({
             status: 404,
             error: 'No comment found',
         });
     }
     
-    res.status(200).json({
+    return res.status(200).json({
         status: 200,
         comment: 'comments successfully retrieved',
         data: {
