@@ -1,0 +1,120 @@
+import chai from "chai";
+import {expect} from "chai";
+import chaiHttp from "chai-http";
+import server from '../index';
+import { v4 as uuidv4 } from 'uuid';
+chai.should();
+
+chai.use(chaiHttp);
+
+describe('comment API', ()=>{
+    // Test GET route
+    describe('GET /comments', ()=>{
+        it('It should get all comments', (done)=>{
+            chai.request(server)
+                .get('/comment')
+                    .end((err, res)=>{
+                        expect(err).to.be.null;
+                        expect(res).to.have.status(200);
+                        expect(res).to.be.an('object');
+                        expect(res.body.data.comments).to.be.an('array');
+                        res.body.data.comments.map(comment=>{
+                            expect(comment.name).to.be.an('string')
+                        });
+                        //expect(res.body.data.comments[0].name).to.be.an('string');
+                        done();
+                    });
+        });
+    });
+
+    // Test GET route by id
+    describe('GET /comment/:id', ()=>{
+    it('It should GET a comment by ID', (done)=>{
+        const commentId = uuidv4;
+        chai.request(server)
+            .get('/comment' + commentId)
+                .end((err, res)=>{
+                    expect(err).to.be.null;
+                    expect(res).to.have.status(200);
+                    expect(res).to.be.an('object');
+                    done();
+                });
+    });
+    it('It should not GET a comment by ID that is not exist', (done) => {
+        chai
+          .request(server)
+          .get('/comment/5')
+          .end((err, res) => {
+            expect(res.status).to.equal(404);
+            expect(res.body.error).to.equal('comment not found');
+            done();
+          });
+      });
+});
+
+    // Test POST route
+    describe('POST /comments', ()=>{
+        it('It should POST a new comment', (done)=>{
+            const comment = {
+                name: 'Isaac',
+                email: 'komeza@gmail.com',
+                comment: 'fgshviwbfuwbvui'
+            };
+            chai.request(server)
+                .post('/comment')
+                .send(comment)
+                    .end((err, res)=>{
+                        expect(err).to.be.null;
+                        expect(res).to.have.status(201);
+                        expect(res).to.be.an('object');
+                        expect(res.body.message).to.equal('comment successfully created');
+                        done();
+                    });
+        });
+    });
+
+    // Test PUT route
+    describe('PUT /comment/:id', ()=>{
+        it('It should PUT a new comment', (done)=>{
+            const commentId = uuidv4;
+            const comment = {
+                name: 'Isaac updated',
+                email: 'komeza@gmail.com',
+                comment: 'fgshviwbfuwbvui changed'
+            };
+            chai.request(server)
+                .put('/comment' + commentId)
+                .send(comment)
+                    .end((err, res)=>{
+                        expect(err).to.be.null;
+                        expect(res).to.have.status(200);
+                        expect(res).to.be.an('object');
+                        done();
+                    });
+        });
+    });
+    // Test DELETE route
+    describe('DELETE /comment/:id', ()=>{
+        it('It should DELETE an existing comment', (done)=>{
+            const commentId = uuidv4;
+
+            chai.request(server)
+                .delete('/comment' + commentId)
+                    .end((err, res)=>{
+                        expect(res).to.have.status(200);
+                        done();
+                    });
+        });
+        it('It should not DELETE a comment by ID that is not exist', (done) => {
+            chai
+              .request(server)
+              .delete('/comment/5')
+              .end((err, res) => {
+                expect(res.status).to.equal(404);
+                expect(res.body.error).to.equal('comment not found');
+                done();
+              });
+          });
+    });
+
+});
