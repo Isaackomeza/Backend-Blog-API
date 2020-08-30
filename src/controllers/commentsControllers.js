@@ -1,96 +1,106 @@
-import comments from '../models/commentsCollection';
+// import comments from '../models/commentsCollection';
+import Comment from '../models/commentsCollection';
+import mongoose from 'mongoose';
+
 import { v4 as uuidv4 } from 'uuid';
+
+export const create = (req, res) => {
+    const comment = new Comment({
+        _id: new mongoose.Types.ObjectId(),
+        name: req.body.name,
+        email: req.body.email,
+        comment: req.body.comment
+    });
+    comment.save().then(result => {
+        console.log(result);
+        return res.status(201).json({
+            status: 201,
+            message: 'comment successfully created',
+            data: comment,
+        });
+    })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err
+            });
+        });
+
+
+};
 
 
 export const readAll = (req, res) => {
-    if (!comments) {
-    return res.status(404).json({
-            status: 404,
-            error: 'No comment found',
-        });
-    }
-    
-    return res.status(200).json({
-        status: 200,
-        comment: 'comments successfully retrieved',
-        data: {
-            comments,
-        },
+    Comment.find()
+    .exec()
+    .then(docs => {
+        console.log("From database",docs);
+        if (docs.length >= 0){
+            res.status(200).json(docs);
+        } else {
+            res.status(404).json({
+                message: 'No entries found'
+            });
+        }
+            
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json({error: err})
     });
 };
 export const readById = (req, res) => {
-    const id = req.params.id;
-    const comment = comments.find((comment) => {
-        return comment.id === id;
-    });
-    if (comment) {
-        return res.status(200).json({
-            status: 200,
-            comment: 'comment successfully retrieved',
-            data: comment,
-        });
-    }
-    return res.status(404).json({
-        status: 404,
-        error: 'comment not found',
+    const id = req.params.commentId;
+    Comment.findById(id)
+    .exec()
+    .then(doc => {
+        console.log("From database",doc);
+        if (doc){
+            res.status(200).json(doc);
+        } else {
+            res.status(404).json({message: 'No valid entry found for provided ID'});
+        }
+        res.status(200).json(doc);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json({error: err})
     });
 
 };
-export const create = (req, res) => {
-    const comment = {
-        id: uuidv4(),
-        name:req.body.name,
+
+
+export const update = (req, res) => {
+    const id = req.params.commentId;
+    Comment.updateMany({_id: id}, {$set: {    
+        name: req.body.name,
         email: req.body.email,
         comment: req.body.comment
-    };
-    comments.push(comment);
-    return res.status(201).json({
-        status: 201,
-        message: 'comment successfully created',
-        data: comment,
+    }
+    })
+    .exec()
+    .then(result => {
+        res.status(200).json(result);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json({
+            error: err
+        });
     });
+}
 
+export const deleteComment = (req, res) => {
+const id = req.params.commentId;
+Comment.remove({_id: id})
+.exec()
+.then(result => {
+    res.status(200).json(result);
+})
+.catch(err => {
+    console.log(err);
+    res.status(500).json({
+        error: err
+    });
+});
 };
-
-export const update=(req,res)=>{
-    const id = req.params.id;
-    const comment = comments.find((comment) => {
-        return comment.id === id;
-    });
-    if(comment){
-        comment.name= req.body.name;
-        comment.email=req.body.email;
-        comment.comment=req.body.comment;
-        
-        return res.status(200).json({
-            status: 200,
-            comment: 'comment successfully updated',
-            data: comment,
-        });
-    }
-    return res.status(404).json({
-        status: 404,
-        error: 'comment not found',
-    });
-    
-}
-
-export const deleteComment=(req,res)=>{
-    const id=req.params.id;
-    const comment = comments.find((comment) => {
-        return comment.id === id;
-    });
-    if(comment){
-        var a = comments.indexOf(comment);
-        comments.splice(a, 1);
-        return res.status(200).json({
-            status: 200,
-            comment: 'comment successfully deleted',
-            data: comment,
-        });
-    }
-    return res.status(404).json({
-        status: 404,
-        error: 'comment not found',
-    });
-}
