@@ -18,8 +18,6 @@ describe('comment API', ()=>{
                         expect(err).to.be.null;
                         expect(res).to.have.status(200);
                         expect(res).to.be.an('object');
-
-                        //expect(res.body.data.comments[0].name).to.be.an('string');
                         done();
                     });
         });
@@ -62,9 +60,9 @@ describe('comment API', ()=>{
                 .send(comment)
                     .end((err, res)=>{
                         expect(err).to.be.null;
-                        expect(res).to.have.status(201);
+                        expect(res).to.have.status(401);
                         expect(res).to.be.an('object');
-                        expect(res.body.message).to.equal('comment successfully created');
+                        expect(res.body.message).to.equal('Auth failed');
                         done();
                     });
         });
@@ -93,7 +91,7 @@ describe('comment API', ()=>{
     // Test DELETE route
     describe('DELETE /comment/:id', ()=>{
         it('It should DELETE an existing comment', (done)=>{
-            const commentId = uuidv4;
+            const commentId = mongoose.Types.ObjectId();
 
             chai.request(server)
                 .delete('/comment' + commentId)
@@ -107,7 +105,7 @@ describe('comment API', ()=>{
               .request(server)
               .delete('/comment/5')
               .end((err, res) => {
-                expect(res.status).to.equal(500);
+                expect(res.status).to.equal(401);
                 done();
               });
           });

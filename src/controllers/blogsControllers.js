@@ -9,16 +9,14 @@ export const create = (req, res) => {
         title: req.body.title,
         description: req.body.description
     });
-    blog.save().then(result => {
-        console.log(result);
+    blog.save().then(() => {
         return res.status(201).json({
             status: 201,
             message: 'blog successfully created',
             data: blog,
         });
     })
-        .catch(err => {
-            console.log(err);
+        .catch(() => {
             res.status(500).json({
                 error: err
             });

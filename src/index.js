@@ -31,7 +31,6 @@ server.get('/', (req, res) => res.status(200).json({
 }));
 server.use('/', Mroute);
 server.use('/', Blogroute);
-server.use('/', Userroute);
 server.use('/', Commentroute);
 server.use("/user", userRoutes);
 
