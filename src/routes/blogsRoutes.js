@@ -4,7 +4,7 @@ import {create, readAll, readById, update, deleteBlog} from '../controllers/blog
 const router = express.Router();
 router.post('/blog', create);
 router.get('/blog', readAll);
-router.get('/blog/:id', readById);
-router.put('/blog/:id', update);
-router.delete('/blog/:id', deleteBlog);
+router.get('/blog/:blogId', readById);
+router.put('/blog/:blogId', update);
+router.delete('/blog/:blogId', deleteBlog);
 export default router;

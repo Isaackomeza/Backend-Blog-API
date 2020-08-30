@@ -1,8 +1,6 @@
-// import comments from '../models/commentsCollection';
 import Comment from '../models/commentsCollection';
 import mongoose from 'mongoose';
 
-import { v4 as uuidv4 } from 'uuid';
 
 export const create = (req, res) => {
     const comment = new Comment({
