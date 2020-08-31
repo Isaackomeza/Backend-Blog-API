@@ -8,7 +8,7 @@
     "dev": "nodemon --exec babel-node ./src/index.js",
     "build": " babel ./src -d build",
     "coverage": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
-    "test": "nyc --reporter=text --reporter=html mocha ./src/test --require @babel/polyfill --require @babel/register --timeout 10000 --exit"
+    "test": "nyc --reporter=text --reporter=html mocha ./src/test --require @babel/polyfill --require @babel/register --timeout 40000 --exit"
   },
   "repository": {
     "type": "git",
@@ -23,12 +23,14 @@
   "homepage": "https://github.com/Isaackomeza/Backend-Blog-API#readme",
   "dependencies": {
     "@babel/polyfill": "^7.10.4",
+    "bcrypt": "^5.0.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "http-errors": "^1.8.0",
     "joi": "^17.2.0",
     "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.10.2",
     "regenerator-runtime": "^0.13.7",
     "uuidv4": "^6.2.2"
   },

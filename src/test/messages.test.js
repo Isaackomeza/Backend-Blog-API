@@ -15,13 +15,8 @@ describe('message API', ()=>{
                 .get('/message')
                     .end((err, res)=>{
                         expect(err).to.be.null;
-                        expect(res).to.have.status(200);
+                        expect(res).to.have.status(401);
                         expect(res).to.be.an('object');
-                        expect(res.body.data.messages).to.be.an('array');
-                        res.body.data.messages.map(message=>{
-                            expect(message.name).to.be.an('string')
-                        });
-                        //expect(res.body.data.messages[0].name).to.be.an('string');
                         done();
                     });
         });
@@ -45,8 +40,7 @@ describe('message API', ()=>{
           .request(server)
           .get('/message/5')
           .end((err, res) => {
-            expect(res.status).to.equal(404);
-            expect(res.body.error).to.equal('message not found');
+            expect(res.status).to.equal(401);
             done();
           });
       });
@@ -112,8 +106,7 @@ describe('message API', ()=>{
               .request(server)
               .delete('/message/5')
               .end((err, res) => {
-                expect(res.status).to.equal(404);
-                expect(res.body.error).to.equal('message not found');
+                expect(res.status).to.equal(401);
                 done();
               });
           });

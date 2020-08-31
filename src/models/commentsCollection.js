@@ -1,17 +1,11 @@
-import { v4 as uuidv4 } from 'uuid';
+// import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
-var comments = [{
-    
-    name:'Komezusenge',
-    email:'komezusengeisaac@gmail.com',
-    comment:'Thank you for this wonderful blog'
-    },
-    {
-    
-    name:'David',
-    email:'david@gmail.com',
-    comment:'Wao!! It is awesome blog '
-    },
-];
-comments=comments.map((comment)=>({id:uuidv4(), ...comment}));
-export default comments;
+
+const commentSchema = mongoose.Schema({
+    _id: mongoose.Schema.Types.ObjectId,
+    name: {type: String, required: true },
+    email: {type: String, required: true },
+    comment: {type: String, required: true }
+});
+module.exports = mongoose.model('Comment', commentSchema)
